@@ -16,6 +16,15 @@ const contactForm = document.getElementById('contactForm');
 let currentSlide = 0;
 const totalSlides = document.querySelectorAll('.carousel-slide').length;
 
+// Smooth scroll function
+function smoothScrollTo(target) {
+    const targetPosition = target.offsetTop - 80; // Account for fixed navbar
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeNavbar();
@@ -23,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeContactForm();
     initializeScrollEffects();
     initializeMobileMenu();
+    initializeScrollAnimations();
 });
 
 // Navbar functionality
@@ -192,6 +202,75 @@ function initializeScrollEffects() {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+    
+    // Smooth scrolling for all navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                smoothScrollTo(targetSection);
+                
+                // Update active navigation link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
+        });
+    });
+    
+    // Add smooth scrolling to scroll indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            const aboutSection = document.querySelector('#about');
+            if (aboutSection) {
+                smoothScrollTo(aboutSection);
+            }
+        });
+    }
+    
+    // Initialize video fullscreen functionality
+    initializeVideoFullscreen();
+}
+
+// Video fullscreen functionality
+function initializeVideoFullscreen() {
+    const video = document.querySelector('.portfolio-video');
+    if (video) {
+        // Add double-click to fullscreen
+        video.addEventListener('dblclick', function() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.mozRequestFullScreen) {
+                video.mozRequestFullScreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        });
+        
+        // Add keyboard support for fullscreen
+        video.addEventListener('keydown', function(e) {
+            if (e.key === 'f' || e.key === 'F') {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.mozRequestFullScreen) {
+                    video.mozRequestFullScreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+            }
+        });
+        
+        // Ensure video is focusable for keyboard events
+        video.setAttribute('tabindex', '0');
+    }
 }
 
 // Mobile menu functionality
@@ -284,6 +363,43 @@ if (!('scrollBehavior' in document.documentElement.style)) {
 }
 
 
+
+// Scroll-triggered animations
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.skill-column, .project-card, .gallery-item, .contact-info, .contact-form');
+    animateElements.forEach(el => {
+        observer.observe(el);
+    });
+}
+
+
+// Enhanced scroll effects with parallax
+function initializeParallaxEffects() {
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.gallery');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+}
+
 // Console log for debugging
 console.log('MP1 Portfolio Website loaded successfully!');
 console.log('Features implemented:');
@@ -298,3 +414,7 @@ console.log('- CSS3 animations');
 console.log('- Responsive design');
 console.log('- FontAwesome icons');
 console.log('- SCSS features (variables, mixins, nesting)');
+console.log('- Dark/Light theme toggle');
+console.log('- Animated progress bars');
+console.log('- Scroll-triggered animations');
+console.log('- Enhanced visual effects');

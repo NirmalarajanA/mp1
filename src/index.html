@@ -9,7 +9,8 @@
     </head>
     <body>
     <!-- Sticky Navigation -->
-    <nav id="navbar" class="navbar">
+    <header>
+        <nav id="navbar" class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="#home">Akshayan Nirmalarajan</a>
@@ -40,8 +41,10 @@
                 <span class="bar"></span>
             </div>
         </div>
-    </nav>
+        </nav>
+    </header>
 
+    <main>
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
@@ -230,10 +233,9 @@
         <div class="container">
             <h2 class="section-title">Watch My Journey</h2>
             <div class="video-container">
-                <video controls poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop&crop=center" class="portfolio-video">
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
-                    Your browser does not support the video tag.
+                <video controls preload="metadata" poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop&crop=center" class="portfolio-video" width="800" height="450" allowfullscreen>
+                    <source src="assets/video-placeholder.mp4" type="video/mp4">
+                    <p>Your browser does not support the video tag. <a href="assets/video-placeholder.mp4" download>Download the video</a> instead.</p>
                 </video>
                 <div class="video-overlay">
                     <h3>My Development Process</h3>
@@ -254,7 +256,7 @@
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>akshayan.nirmalarajan@illinois.edu</span>
+                            <span>an90@illinois.edu</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
@@ -289,13 +291,14 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-text">
-                    <p>&copy; 2024 Akshayan Nirmalarajan. All rights reserved.</p>
+                    <p>&copy; 2025 Akshayan Nirmalarajan. All rights reserved.</p>
                 </div>
                 <div class="footer-links">
                     <a href="#home">Home</a>

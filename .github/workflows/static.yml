@@ -26,7 +26,7 @@ jobs:
           node-version: "20"
       # Prevent Jekyll from hiding files/folders that start with "_"
       - name: Add .nojekyll
-        run: touch src/.nojekyll
+        run: touch build/.nojekyll
       # (Optional, for single-page apps that need history fallback)
       # - name: Add 404 fallback
       #   run: cp src/index.html src/404.html

@@ -4,7 +4,8 @@
   "description": "CS498RK MP1",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "NODE_ENV=production webpack",
+    "build:dev": "webpack"
   },
   "author": "UIUC Web Programming Staff",
   "license": "ISC",
